@@ -1,0 +1,21 @@
+from PyQt5 import QtCore
+from PyQt5 import QtGui
+from PyQt5.QtCore import pyqtSlot
+from PyQt5.QtGui import QImage, QPixmap
+from PyQt5.QtWidgets import QMainWindow, QApplication, QFileDialog, QMessageBox
+from PyQt5.QtPrintSupport import QPrintDialog, QPrinter
+from PyQt5.uic import loadUi
+import sys
+import cv2
+import numpy as np
+import scipy.signal as sig
+import scipy.ndimage as ndi
+import matplotlib.pyplot as plt
+
+
+=========== # ============
+pip install pyqt5
+pip install numpy
+pip install matplotlib
+pip install scipy
+pip install opencv-python
