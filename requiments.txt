@@ -20,3 +20,6 @@ pip install matplotlib
 pip install scipy
 pip install opencv-python
 pip install os
+
+using this command to install library
+pip install -r requiments.txt
