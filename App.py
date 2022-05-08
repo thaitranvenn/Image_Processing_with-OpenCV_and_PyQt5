@@ -32,11 +32,11 @@ class LoadQt(QMainWindow):
         self.actionOpen.triggered.connect(self.openImage)
         self.actionSave.triggered.connect(self.saveImage)
         self.actionPrint.triggered.connect(self.createPrintDialog)
-        self.actionQuit.triggered.connect(self.QuestionMessage)
-        self.actionBig.triggered.connect(self.big_Img)
-        self.actionSmall.triggered.connect(self.small_Img)
-        self.actionQt.triggered.connect(self.AboutMessage)
-        self.actionAuthor.triggered.connect(self.AboutMessage2)
+        self.actionQuit.triggered.connect(self.questionMessage)
+        self.actionBig.triggered.connect(self.bigImage)
+        self.actionSmall.triggered.connect(self.smallImage)
+        self.actionQt.triggered.connect(self.aboutMessage)
+        self.actionAuthor.triggered.connect(self.aboutMessage2)
 
         # Chương 2
         self.actionRotation.triggered.connect(self.rotation)
@@ -51,38 +51,38 @@ class LoadQt(QMainWindow):
         self.actionGamma.triggered.connect(self.gamma)
 
         # Image Restoration
-        self.actionGaussian.triggered.connect(self.gaussian_noise)
-        self.actionRayleigh.triggered.connect(self.rayleigh_noise)
-        self.actionErlang.triggered.connect(self.erlang_noise)
-        self.actionUniform.triggered.connect(self.uniform_noise)
-        self.actionImpluse.triggered.connect(self.impulse_noise)
+        self.actionGaussian.triggered.connect(self.gaussianNoise)
+        self.actionRayleigh.triggered.connect(self.rayleighNoise)
+        self.actionErlang.triggered.connect(self.erlangNoise)
+        self.actionUniform.triggered.connect(self.uniformNoise)
+        self.actionImpluse.triggered.connect(self.impulseNoise)
         self.actionHistogram_PDF.triggered.connect(self.hist)
 
         # Image Restoration 1
-        self.actionAdaptive_Wiener_Filtering.triggered.connect(self.weiner_filter)
-        self.actionMedian_Filtering.triggered.connect(self.median_filtering)
-        self.actionAdaptive_Median_Filtering.triggered.connect(self.adaptive_median_filtering)
+        self.actionAdaptive_Wiener_Filtering.triggered.connect(self.weinerFilter)
+        self.actionMedian_Filtering.triggered.connect(self.medianFiltering)
+        self.actionAdaptive_Median_Filtering.triggered.connect(self.adaptiveMedianFiltering)
 
         # Image Restoration 2
-        self.actionInverse_Filter.triggered.connect(self.inv_filter)
+        self.actionInverse_Filter.triggered.connect(self.invFilter)
 
         # Simple Edge Detection
-        self.actionSHT.triggered.connect(self.simple_edge_detection)
+        self.actionSHT.triggered.connect(self.simpleEdgeDetection)
 
         # Smoothing
         self.actionBlur.triggered.connect(self.blur)
-        self.actionBox_Filter.triggered.connect(self.box_filter)
-        self.actionMedian_Filter.triggered.connect(self.median_filter)
-        self.actionBilateral_Filter.triggered.connect(self.bilateral_filter)
-        self.actionGaussian_Filter.triggered.connect(self.gaussian_filter)
+        self.actionBox_Filter.triggered.connect(self.boxFilter)
+        self.actionMedian_Filter.triggered.connect(self.medianFilter)
+        self.actionBilateral_Filter.triggered.connect(self.bilateralFilter)
+        self.actionGaussian_Filter.triggered.connect(self.gaussianFilter)
 
         # Filter
-        self.actionMedian_threshold_2.triggered.connect(self.median_threshold)
-        self.actionDirectional_Filtering_2.triggered.connect(self.directional_filtering)
-        self.actionDirectional_Filtering_3.triggered.connect(self.directional_filtering2)
-        self.actionDirectional_Filtering_4.triggered.connect(self.directional_filtering3)
-        self.action_Butterworth.triggered.connect(self.butter_filter)
-        self.action_Notch_filter.triggered.connect(self.notch_filter)
+        self.actionMedian_threshold_2.triggered.connect(self.medianThreshold)
+        self.actionDirectional_Filtering_2.triggered.connect(self.directionalFiltering)
+        self.actionDirectional_Filtering_3.triggered.connect(self.directionalFiltering2)
+        self.actionDirectional_Filtering_4.triggered.connect(self.directionalFiltering3)
+        self.action_Butterworth.triggered.connect(self.butterFilter)
+        self.action_Notch_filter.triggered.connect(self.notchFilter)
 
         # Cartooning of an Image
         self.actionCartoon.triggered.connect(self.cartoon)
@@ -90,10 +90,10 @@ class LoadQt(QMainWindow):
         # Set input
         self.dial.valueChanged.connect(self.rotation2)
         self.horizontalSlider.valueChanged.connect(self.Gamma_)
-        self.gaussian_QSlider.valueChanged.connect(self.gaussian_filter2)
+        self.gaussian_QSlider.valueChanged.connect(self.gaussianFilter2)
         self.erosion.valueChanged.connect(self.erode)
         self.Qlog.valueChanged.connect(self.Log)
-        self.size_Img.valueChanged.connect(self.SIZE)
+        self.size_Img.valueChanged.connect(self.size)
         self.canny.stateChanged.connect(self.Canny)
         self.canny_min.valueChanged.connect(self.Canny)
         self.canny_max.valueChanged.connect(self.Canny)
@@ -150,15 +150,15 @@ class LoadQt(QMainWindow):
         if dialog.exec_() == QPrintDialog.Accepted:
             self.imgLabel2.print_(printer)
 
-    def big_Img(self):
+    def bigImage(self):
         self.image = cv2.resize(self.image, None, fx=1.5, fy=1.5, interpolation=cv2.INTER_CUBIC)
         self.displayImage(2)
 
-    def small_Img(self):
+    def smallImage(self):
         self.image = cv2.resize(self.image, None, fx=0.75, fy=0.75, interpolation=cv2.INTER_CUBIC)
         self.displayImage(2)
 
-    def SIZE(self , c):
+    def size(self , c):
         self.image = self.tmp
         self.image = cv2.resize(self.image, None, fx=c, fy=c, interpolation=cv2.INTER_CUBIC)
         self.displayImage(2)
@@ -167,7 +167,7 @@ class LoadQt(QMainWindow):
         self.image = self.tmp
         self.displayImage(2)
 
-    def AboutMessage(self):
+    def aboutMessage(self):
         QMessageBox.about(self, "About Qt - Qt Designer",
             "Qt is a multiplatform C + + GUI toolkit created and maintained byTrolltech.It provides application developers with all the functionality needed to build applications with state-of-the-art graphical user interfaces.\n"
             "Qt is fully object-oriented, easily extensible, and allows true component programming.Read the Whitepaper for a comprehensive technical overview.\n\n"
@@ -188,14 +188,14 @@ class LoadQt(QMainWindow):
                 "\tThe Qt Enterprise Edition and the Qt Professional Edition provide for commercial software development.They permit traditional commercial software distribution and include free upgrades and Technical Support.For the latest prices, see the Trolltech web site, Pricing and Availability page, or contact sales @ trolltech.com.The Enterprise Edition offers additional modules compared to the Professional Edition.\n\n"
                 "\tThe Qt Open Source Edition is available for Unix / X11, Macintosh and Embedded Linux.The Open Source Edition is for the development of Free and Open Source software only.It is provided free of charge under the terms of both the Q Public License and the GNU General Public License."
         )
-    def AboutMessage2(self):
+    def aboutMessage2(self):
         QMessageBox.about(self, "About Author", "Executor: Tran Huu Thai\n\n"
                                                     "Contact me: \n"
                                                     "Number Phone - 89138032486\n"
                                                     "Email - Thaitran130399.tusur@gmail.com"
                           )
 
-    def QuestionMessage(self):
+    def questionMessage(self):
         message = QMessageBox.question(self, "Exit", "Do you want to exit? Please sure that you saved all your data!", QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
         if message == QMessageBox.Yes:
             print("Yes")
@@ -260,7 +260,7 @@ class LoadQt(QMainWindow):
         self.image = cv2.cvtColor(self.image, cv2.COLOR_BGR2GRAY)
         self.displayImage(2)
 
-    def anh_Xam2(self):
+    def grayImage2(self):
         self.image = self.tmp
         if self.gray.isChecked():
             self.image = cv2.cvtColor(self.image, cv2.COLOR_BGR2GRAY)
@@ -307,7 +307,7 @@ class LoadQt(QMainWindow):
         self.displayImage(2)
 
 ####################################### Image Restoration #######################################
-    def gaussian_noise(self):
+    def gaussianNoise(self):
         self.image = self.tmp
         row, col, ch = self.image.shape
         mean = 0
@@ -317,7 +317,7 @@ class LoadQt(QMainWindow):
         gauss = gauss.reshape(row, col, ch)
         self.image = self.image + gauss
         self.displayImage(2)
-    def erlang_noise(self):
+    def erlangNoise(self):
         self.image = self.tmp
         gamma = 1.5
         invGamma = 1.0 / gamma
@@ -326,18 +326,18 @@ class LoadQt(QMainWindow):
         cv2.randu(table, 1, 1)
         self.image = cv2.LUT(self.image, table)
         self.displayImage(2)
-    def rayleigh_noise(self):
+    def rayleighNoise(self):
         self.image = self.tmp
         r = np.zeros((self.image.shape[0], self.image.shape[1]), dtype=np.uint8)
         self.image = cv2.randu(r, 1, 1)
         self.displayImage(2)
-    def uniform_noise(self):
+    def uniformNoise(self):
         self.image = self.tmp
         uniform_noise = np.zeros((self.image.shape[0], self.image.shape[1]), dtype=np.uint8)
         cv2.randu(uniform_noise, 0, 255)
         self.image = (uniform_noise * 0.5).astype(np.uint8)
         self.displayImage(2)
-    def impulse_noise(self):
+    def impulseNoise(self):
         self.image = self.tmp
         s_vs_p = 0.5
         amount = 0.004
@@ -365,12 +365,12 @@ class LoadQt(QMainWindow):
         self.displayImage(2)
 
 ####################################Image Restoration 1############################################
-    def median_filtering(self):
+    def medianFiltering(self):
         self.image = self.tmp
         self.image = cv2.medianBlur(self.image, 5)
         self.displayImage(2)
 
-    def adaptive_median_filtering(self):
+    def adaptiveMedianFiltering(self):
         self.image = self.tmp
         temp = []
         filter_size = 5
@@ -395,7 +395,7 @@ class LoadQt(QMainWindow):
                 temp = []
         self.displayImage(2)
 
-    def weiner_filter(self):
+    def weinerFilter(self):
         self.image = self.tmp
         M = 256  # length of Wiener filter
         Om0 = 0.1 * np.pi  # frequency of original signal
@@ -419,7 +419,7 @@ class LoadQt(QMainWindow):
         self.displayImage(2)
 
 ####################################Image Restoration 2##########################################
-    def inv_filter(self):
+    def invFilter(self):
         self.image = self.tmp
         for i in range(0, 3):
             g = self.image[:, :, i]
@@ -445,7 +445,7 @@ class LoadQt(QMainWindow):
         self.displayImage(2)
 
 ##################################Simple Edge Detection############################################
-    def simple_edge_detection(self):
+    def simpleEdgeDetection(self):
         self.image = self.tmp
 
         # Convert the img to grayscale
@@ -495,51 +495,51 @@ class LoadQt(QMainWindow):
         self.image = self.tmp
         self.image = cv2.blur(self.image, (5, 5))
         self.displayImage(2)
-    def box_filter(self):
+    def boxFilter(self):
         self.image = self.tmp
         self.image = cv2.boxFilter(self.image, -1,(20,20))
         self.displayImage(2)
-    def median_filter(self):
+    def medianFilter(self):
         self.image = self.tmp
         self.image = cv2.medianBlur(self.image,5)
         self.displayImage(2)
-    def bilateral_filter(self):
+    def bilateralFilter(self):
         self.image = self.tmp
         self.image = cv2.bilateralFilter(self.image,9,75,75)
         self.displayImage(2)
-    def gaussian_filter(self):
+    def gaussianFilter(self):
         self.image = self.tmp
         self.image = cv2.GaussianBlur(self.image,(5,5),0)
         self.displayImage(2)
-    def gaussian_filter2(self, g):
+    def gaussianFilter2(self, g):
         self.image = self.tmp
         self.image = cv2.GaussianBlur(self.image, (5, 5), g)
         self.displayImage(2)
 ########################################Filter##########################################################################
-    def median_threshold(self):
+    def medianThreshold(self):
         self.image = self.tmp
         grayscaled = cv2.cvtColor(self.image, cv2.COLOR_BGR2GRAY)
         self.image = cv2.medianBlur(self.image,5)
         retval, threshold = cv2.threshold(grayscaled,125,255,cv2.THRESH_BINARY+cv2.THRESH_OTSU)
         self.image = threshold
         self.displayImage(2)
-    def directional_filtering(self):
+    def directionalFiltering(self):
         self.image = self.tmp
         kernel = np.ones((3, 3), np.float32) / 9
         self.image = cv2.filter2D(self.image, -1, kernel)
         self.displayImage(2)
-    def directional_filtering2(self):
+    def directionalFiltering2(self):
         self.image = self.tmp
         kernel = np.ones((5, 5), np.float32) / 9
         self.image = cv2.filter2D(self.image, -1, kernel)
         self.displayImage(2)
-    def directional_filtering3(self):
+    def directionalFiltering3(self):
         self.image = self.tmp
         kernel = np.ones((7, 7), np.float32) / 9
         self.image = cv2.filter2D(self.image, -1, kernel)
         self.displayImage(2)
 
-    def butter_filter(self):
+    def butterFilter(self):
         self.image = self.tmp
         img_float32 = np.float32(self.image)
 
@@ -548,7 +548,7 @@ class LoadQt(QMainWindow):
 
         self.image = 20 * np.log(cv2.magnitude(self.image[:, :, 0], self.image[:, :, 1]))
         self.displayImage(2)
-    def notch_filter(self):
+    def notchFilter(self):
         self.image = self.tmp
 
         self.displayImage(2)
